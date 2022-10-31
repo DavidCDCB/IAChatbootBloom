@@ -1,0 +1,19 @@
+.row>* {
+  padding: 0px;
+}
+
+.alert{
+  padding: 0.6em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: 80%;
+}
+
+body{
+	background-color: #063346;
+	color: white;
+}
+
+.fuente{
+  font-size: 1.5em;
+}
