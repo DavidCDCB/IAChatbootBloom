@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 import HttpClient from './HttpClient';
 import 'bootswatch/dist/sketchy/bootstrap.min.css';
 import './App.css';
+import { AxiosError } from 'axios';
 
 function App() {
   const initialText = "Esta es una conversación entre el ser humano y la inteligencia artificial más avanzada del mundo que entiende el lenguaje humano y sabe interactuar con ser humano ademas de ser capaz de expresarse como el.\n";
@@ -41,13 +42,19 @@ function App() {
         });
         setLoading(false);
       }
-    } catch (error) {
-      Swal.fire(
-        '¡Error!',
-        'Se ha excedido el limite de mensajes.',
-        'error'
-      )
-      setLoading(false);
+    } catch (error: AxiosError | any) {
+      console.log(error);
+      if(error.response){
+        Swal.fire(
+          '¡Error!',
+          'Se ha excedido el limite de mensajes o el servicio se encuentra saturado por el momento.',
+          'error'
+        )
+        setLoading(false);
+      }else{
+        console.log("Reintendo");
+        getData(fullText);
+      }
     }
   };
 
@@ -87,8 +94,8 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className='container'>
+    <div className="App mx-md-5 mx-lg-5">
+      <div className="container">
       <div className="d-flex justify-content-center">
         <h2 className="mt-2"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
       </div>
@@ -117,7 +124,8 @@ function App() {
         }
         <div className="row mt-2">
           <div className="col-9 col-md-11">
-            <input onChange={setTextInput} onKeyDown={checkKey} ref={inputReference} value={textInput} type="email" className="fuente form-control" placeholder="Inicia una conversación con la IA" />
+            <input onChange={setTextInput} onKeyDown={checkKey} ref={inputReference} value={textInput} 
+            type="text" className="fuente form-control" placeholder="Inicia una conversación con la IA" />
           </div>
           <div className="col-3 col-md-1">
             <button className='fuente form-control btn btn-success' disabled={loading} onClick={setText} >

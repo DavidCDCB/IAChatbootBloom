@@ -8,6 +8,13 @@ body {
   padding: 0px;
 }
 
+@media (min-width: 992px) { 
+  .mx-lg-5, .mx-md-5{
+    margin-left: 20em !important;
+    margin-right: 20em !important;
+  }
+}
+
 .alert{
   padding: 0.6em;
   overflow-wrap: break-word;

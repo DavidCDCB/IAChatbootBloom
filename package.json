@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "bootswatch": "^5.2.1",
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "deta deploy ./bloom_api"
   },
   "dependencies": {
     "axios": "^1.1.0",
