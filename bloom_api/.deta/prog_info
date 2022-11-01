@@ -1,0 +1,1 @@
+{"id":"1a9b8dfc-8c88-46c6-bd39-c1d8093bec6d","space":36778,"runtime":"python3.9","name":"bloom_api","path":"9km7oj","project":"b064x6q5","account":"144798365827","region":"us-east-1","deps":["Flask==2.0.2","Flask-Cors==3.0.10","requests==2.22.0","googletrans==3.1.0a0"],"envs":null,"public":true,"log_level":"debug","cron":""}
