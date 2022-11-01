@@ -26,6 +26,7 @@ function App() {
       });
       return;
     };
+    setLoading(true);
     getData(fullText);
   }, [fullText]);
 
@@ -89,7 +90,7 @@ function App() {
     <div className="App">
       <div className='container'>
       <div className="d-flex justify-content-center">
-        <h2 className="mt-2"><i className="fas fa-robot"></i> IA Chatbot Bloom</h2>
+        <h2 className="mt-2"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
       </div>
         {
           messages.map((msg: string, index) =>
@@ -100,8 +101,17 @@ function App() {
         }
         {
           (loading === true) && (
-            <div className="d-flex justify-content-center">
-              <img src="./2074796765loading-gears-animation-3.gif" width="20%" />
+            <div className="fuente alert alert-success" >
+              <div className="row">
+                <div className="col d-flex justify-content-center">
+                  <img src="./loading.webp" width="20%" />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col d-flex justify-content-center">
+                  <p>Procesando...</p>
+                </div>
+              </div>
             </div>
           )
         }
@@ -110,12 +120,15 @@ function App() {
             <input onChange={setTextInput} onKeyDown={checkKey} ref={inputReference} value={textInput} type="email" className="fuente form-control" placeholder="Inicia una conversación con la IA" />
           </div>
           <div className="col-3 col-md-1">
-            <button className='fuente form-control btn btn-success' onClick={setText} >
+            <button className='fuente form-control btn btn-success' disabled={loading} onClick={setText} >
               <div className="d-flex align-items-center justify-content-center">
                 <span className="my-1 material-symbols-rounded">send</span>
               </div>
             </button>
           </div>
+        </div>
+        <div className="row mt-3">
+          <div>Web service developed by <a href="https://github.com/DavidCDCB">DavidCDCB </a></div>
         </div>
       </div>
     </div>
