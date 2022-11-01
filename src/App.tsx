@@ -97,7 +97,7 @@ function App() {
     <div className="App mx-md-5 mx-lg-5">
       <div className="container">
       <div className="d-flex justify-content-center">
-        <h2 className="mt-2"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
+        <h2 className="mt-3"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
       </div>
         {
           messages.map((msg: string, index) =>
@@ -125,7 +125,8 @@ function App() {
         <div className="row mt-2">
           <div className="col-9 col-md-11">
             <input onChange={setTextInput} onKeyDown={checkKey} ref={inputReference} value={textInput} 
-            type="text" className="fuente form-control" placeholder="Inicia una conversación con la IA" />
+            type="text" className="fuente form-control" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="Inicia una conversación con la IA"/>
           </div>
           <div className="col-3 col-md-1">
             <button className='fuente form-control btn btn-success' disabled={loading} onClick={setText} >
