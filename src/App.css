@@ -1,3 +1,9 @@
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.808), rgba(0, 0, 0, 0.8)), 
+  url("https://qph.cf2.quoracdn.net/main-qimg-6a21920c78cd26d7877965ed2961eda8");
+  background-size: cover;
+}
+
 .row>* {
   padding: 0px;
 }
@@ -10,7 +16,7 @@
 }
 
 body{
-	background-color: #063346;
+
 	color: white;
 }
 
@@ -20,4 +26,8 @@ body{
 
 a{
   color: white;
+}
+
+a:hover{
+  color: cyan;
 }
