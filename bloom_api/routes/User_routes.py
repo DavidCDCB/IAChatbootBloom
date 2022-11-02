@@ -5,49 +5,9 @@ from googletrans import Translator
 
 user_routes = Blueprint('user_routes', __name__)
 
-
 @user_routes.route('/', methods=['GET'])
 def get_users():
     return "OK"
-
-
-@user_routes.route('/gptjneox', methods=['POST'])
-def api_gptjneox():
-    headers = {
-        "accept": "*/*",
-        "accept-language": "en-US,en;q=0.9",
-        "authorization": "Bearer 842a11464f81fc8be43ac76fb36426d2",
-        "content-type": "application/json",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site",
-        "sec-gpc": "1",
-        "Referer": "https://textsynth.com/",
-        "Referrer-Policy": "strict-origin-when-cross-origin"
-    }
-
-    url = "https://api.textsynth.com/v1/engines/gptneox_20B/completions"
-
-    request_body = request.json
-    translator = Translator()
-    input_t = translator.translate(request_body['texto'], dest='en').text
-
-    payload = json.dumps(
-        json.loads(
-            '{"prompt":"' + input_t +
-            '","temperature":1,"top_k":40,"top_p":0.5,"max_tokens":200,"stream":true,"stop":null}'
-        ))
-
-    r = requests.post(url, headers=headers, data=payload)
-
-    output = ""
-    for l in r.text.split("\n"):
-        if (l != ""):
-            output += json.loads(l)['text'].replace("\n", "")
-    output = translator.translate(output, dest='es').text
-
-    return jsonify({'text': output})
-
 
 @user_routes.route('/gptbloom', methods=['POST'])
 def api_gptBloom():
@@ -93,7 +53,7 @@ def api_gptBloom_chatbot():
     headers = {"Authorization": "Bearer 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"}
 
     parameters = {
-        "max_new_tokens": 64,
+        "max_new_tokens": 100,
         "temperature": 0.9,
         "top_p": 0.9,
         "top_k": 50,

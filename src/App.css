@@ -1,6 +1,6 @@
 body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.808), rgba(0, 0, 0, 0.8)), 
-  url("https://qph.cf2.quoracdn.net/main-qimg-6a21920c78cd26d7877965ed2961eda8");
+  url("./background.jpg");
   background-size: cover;
 }
 
@@ -15,16 +15,26 @@ body {
   }
 }
 
+textarea.form-control{
+  height: 0.5em;
+  resize: vertical;
+}
+
 .alert{
   padding: 0.6em;
   overflow-wrap: break-word;
-  word-wrap: break-word;
+  word-break: break-all;
   width: 80%;
 }
 
 body{
 
 	color: white;
+}
+
+input{
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .fuente{
