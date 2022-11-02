@@ -120,7 +120,7 @@ function App() {
             <div className="fuente alert alert-success" >
               <div className="row">
                 <div className="col d-flex justify-content-center">
-                  <img src="./loading.webp" width="20%" />
+                  <img src="../loading.webp" width="20%" />
                 </div>
               </div>
               <div className="row">
