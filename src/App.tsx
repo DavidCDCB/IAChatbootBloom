@@ -10,6 +10,7 @@ function App() {
   const [textInput, changeTextInput] = useState<string>("");
   const [messages, setMessage] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [tip, changeTip] = useState<boolean>(true);
   const [fullText, setFullText] = useState<string>(initialText);
   const inputReference = useRef<HTMLTextAreaElement | null>(null);
 
@@ -133,7 +134,8 @@ function App() {
         }
         <div className="row mt-2">
           <div className="col-9 col-md-11">
-            <textarea onChange={setTextInput} onKeyDown={checkKey} ref={inputReference} value={textInput} 
+            <textarea onChange={setTextInput} onKeyDown={checkKey} 
+            onBlur={()=>{changeTip(false)}} onFocus={()=>{changeTip(true)}} ref={inputReference} value={textInput} 
             className="fuente form-control" placeholder="Inicia una conversación"></textarea>
           </div>
           <div className="col-3 col-md-1 d-flex align-items-center">
@@ -144,6 +146,11 @@ function App() {
             </button>
           </div>
         </div>
+        {
+          (tip && textInput === "" && messages.length > 0) && (
+            <p className='tip'>Envía un mensaje vacío para generar una respuesta diferente</p>
+          )
+        }
         <div className="row mt-3">
           <div>Web service developed by <a href="https://github.com/DavidCDCB">DavidCDCB </a></div>
         </div>

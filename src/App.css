@@ -48,3 +48,8 @@ a{
 a:hover{
   color: cyan;
 }
+
+.tip{
+  font-size: 0.8em;
+  color:azure;
+}

@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { RawData } from './types';
 
 const api = axios.create();
+// https://apibloomchatbot.vercel.app/gptbloomChatBot
 const source = 'https://9km7oj.deta.dev/gptbloomChatBot';
 
 const HttpClient = {
