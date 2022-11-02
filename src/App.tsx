@@ -13,6 +13,7 @@ function App() {
   const [tip, changeTip] = useState<boolean>(true);
   const [fullText, setFullText] = useState<string>(initialText);
   const inputReference = useRef<HTMLTextAreaElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if(fullText === initialText){
@@ -34,7 +35,7 @@ function App() {
       const scrollHeight = inputReference.current.scrollHeight;
       inputReference.current.style.height = scrollHeight + "px";
     }
-  }, [textInput]);
+  }, [textInput]);  
 
   const executeRequest = async (text: string): Promise<void> => {
     console.log(fullText);
@@ -65,8 +66,8 @@ function App() {
   };
 
   const setText = (): void => {
-    changeTextInput("");
-    if(textInput !== ""){
+    if(textInput !== "?"){
+      changeTextInput("");
       if(messages.length){
         setFullText((prev: string)=>prev+"\nIA: "+messages[messages.length-1]+"\nHumano: "+textInput);
       }else{
@@ -82,6 +83,10 @@ function App() {
     if(e.key === "Enter" && loading === false){
       setText();
     }
+  }
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView(false);
   }
 
   const setTextInput = (e: FormEvent<HTMLTextAreaElement>): void => {
@@ -104,7 +109,7 @@ function App() {
   }
 
   return (
-    <div className="App mx-md-5 mx-lg-5">
+    <div className="App mx-md-5 mx-lg-5" ref={messagesEndRef}>
       <div className="container">
       <div className="d-flex justify-content-center">
         <h2 className="mt-3"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
@@ -135,7 +140,8 @@ function App() {
         <div className="row mt-2">
           <div className="col-9 col-md-11">
             <textarea onChange={setTextInput} onKeyDown={checkKey} 
-            onBlur={()=>{changeTip(false)}} onFocus={()=>{changeTip(true)}} ref={inputReference} value={textInput} 
+            onBlur={()=>{changeTip(false);scrollToBottom();}} onFocus={()=>{changeTip(true)}} 
+            ref={inputReference} value={textInput} 
             className="fuente form-control" placeholder="Inicia una conversación"></textarea>
           </div>
           <div className="col-3 col-md-1 d-flex align-items-center">
@@ -148,7 +154,12 @@ function App() {
         </div>
         {
           (tip && textInput === "" && messages.length > 0) && (
-            <p className='tip'>Envía un mensaje vacío para generar una respuesta diferente</p>
+            <p className='tip'>Envía ? para generar una respuesta diferente</p>
+          )
+        }
+        {
+          (messages.length === 0) && (
+            <p className='tip'>¿Quienes te crearon?, ¿Como funcionas?, ¿Que opinas del ser humano?</p>
           )
         }
         <div className="row mt-3">
