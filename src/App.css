@@ -22,8 +22,6 @@ textarea.form-control{
 
 .alert{
   padding: 0.6em;
-  overflow-wrap: break-word;
-  word-break: break-all;
   width: 80%;
 }
 

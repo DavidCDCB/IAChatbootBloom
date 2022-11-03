@@ -159,7 +159,7 @@ function App() {
         }
         {
           (messages.length === 0) && (
-            <p className='tip'>¿Quienes te crearon?, ¿Como funcionas?, ¿Que opinas del ser humano?</p>
+            <p className='tip'>¿Quiénes te crearon?, ¿Como funcionas?, ¿Que opinas del ser humano?</p>
           )
         }
         <div className="row mt-3">
