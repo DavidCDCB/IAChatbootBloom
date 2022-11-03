@@ -86,7 +86,9 @@ function App() {
   }
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView(false);
+    if (messagesEndRef && messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
   }
 
   const setTextInput = (e: FormEvent<HTMLTextAreaElement>): void => {
@@ -109,61 +111,65 @@ function App() {
   }
 
   return (
-    <div className="App mx-md-5 mx-lg-5" ref={messagesEndRef}>
+    <div className="App mx-md-5 mx-lg-5">
       <div className="container">
-      <div className="d-flex justify-content-center">
-        <h2 className="mt-3"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
-      </div>
-        {
-          messages.map((msg: string, index) =>
-            <div key={index}>
-              {createBox(index, msg)}
-            </div>
-          )
-        }
-        {
-          (loading === true) && (
-            <div className="fuente alert alert-success" >
-              <div className="row">
-                <div className="col d-flex justify-content-center">
-                  <img src="../loading.webp" width="20%" />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col d-flex justify-content-center">
-                  <p>Procesando...</p>
-                </div>
-              </div>
-            </div>
-          )
-        }
-        <div className="row mt-2">
-          <div className="col-9 col-md-11">
-            <textarea onChange={setTextInput} onKeyDown={checkKey} 
-            onBlur={()=>{changeTip(false);scrollToBottom();}} onFocus={()=>{changeTip(true)}} 
-            ref={inputReference} value={textInput} 
-            className="fuente form-control" placeholder="Inicia una conversación"></textarea>
-          </div>
-          <div className="col-3 col-md-1 d-flex align-items-center">
-            <button className='fuente form-control btn btn-success' disabled={loading} onClick={setText} >
-              <div className="d-flex align-items-center justify-content-center">
-                <span className="my-1 material-symbols-rounded">send</span>
-              </div>
-            </button>
-          </div>
+        <div className="d-flex justify-content-center">
+          <h2 className="mt-3"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
         </div>
-        {
-          (tip && textInput === "" && messages.length > 0) && (
-            <p className='tip'>Envía ? para generar una respuesta diferente</p>
-          )
-        }
-        {
-          (messages.length === 0) && (
-            <p className='tip'>¿Quiénes te crearon?, ¿Como funcionas?, ¿Que opinas del ser humano?</p>
-          )
-        }
-        <div className="row mt-3">
-          <div>Web service developed by <a href="https://github.com/DavidCDCB">DavidCDCB </a></div>
+        <div className="messages" ref={messagesEndRef}>
+          {
+            messages.map((msg: string, index) =>
+              <div key={index}>
+                {createBox(index, msg)}
+              </div>
+            )
+          }
+          {
+            (loading === true) && (
+              <div className="fuente alert alert-success" >
+                <div className="row">
+                  <div className="col d-flex justify-content-center">
+                    <img src="../loading.webp" width="20%" />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col d-flex justify-content-center">
+                    <p>Procesando...</p>
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </div>
+        <div className="sticky">
+          <div className="row mt-2">
+            <div className="col-9 col-md-11">
+              <textarea onChange={setTextInput} onKeyDown={checkKey} 
+              onBlur={()=>{changeTip(false);scrollToBottom();}} onFocus={()=>{changeTip(true)}} 
+              ref={inputReference} value={textInput} 
+              className="fuente form-control" placeholder="Inicia una conversación"></textarea>
+            </div>
+            <div className="col-3 col-md-1 d-flex align-items-center">
+              <button className='fuente form-control btn btn-success' disabled={loading} onClick={setText} >
+                <div className="d-flex align-items-center justify-content-center">
+                  <span className="my-1 material-symbols-rounded">send</span>
+                </div>
+              </button>
+            </div>
+          </div>
+          {
+            (tip && textInput === "" && messages.length > 0) && (
+              <p className='tip'>Envía ? para generar una respuesta diferente</p>
+            )
+          }
+          {
+            (messages.length === 0) && (
+              <p className='tip'>¿Quiénes te crearon?, ¿Como funcionas?, ¿Que opinas del ser humano?</p>
+            )
+          }
+          <div className="row mt-3">
+            <div>Web service developed by <a href="https://github.com/DavidCDCB">DavidCDCB </a></div>
+          </div>
         </div>
       </div>
     </div>
