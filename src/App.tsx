@@ -25,6 +25,7 @@ function App() {
       });
       return;
     };
+    scrollToBottom();
     inputReference.current?.blur();
     executeRequest(fullText);
   }, [fullText]);
@@ -113,8 +114,10 @@ function App() {
   return (
     <div className="App mx-md-5 mx-lg-5">
       <div className="container">
-        <div className="d-flex justify-content-center">
-          <h2 className="mt-3"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
+        <div className="sticky">
+          <div className="d-flex justify-content-center">
+            <h2 className="mt-3"><i className="fas fa-robot"></i> IA Bloom Chatbot</h2>
+          </div>
         </div>
         <div className="messages" ref={messagesEndRef}>
           {
@@ -141,11 +144,11 @@ function App() {
             )
           }
         </div>
-        <div className="sticky">
+        <div>
           <div className="row mt-2">
             <div className="col-9 col-md-11">
               <textarea onChange={setTextInput} onKeyDown={checkKey} 
-              onBlur={()=>{changeTip(false);scrollToBottom();}} onFocus={()=>{changeTip(true)}} 
+              onBlur={()=>{changeTip(false)}} onFocus={()=>{changeTip(true);scrollToBottom();}} 
               ref={inputReference} value={textInput} 
               className="fuente form-control" placeholder="Inicia una conversación"></textarea>
             </div>
