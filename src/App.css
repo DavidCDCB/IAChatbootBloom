@@ -67,3 +67,7 @@ a:hover{
   position: sticky;
   top: 0;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
